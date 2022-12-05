@@ -7,13 +7,60 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet" />
   <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
+    body { 
+      margin:0;
+      padding:0;
+    }
+    h3 {
+      margin: 10px;
+    }
+    p {
+      margin: 10px;
+    }
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #fff;
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
+    #features {
+      top: 0;
+      height: 110px;
+      margin-top: 20px;
+      width: 275px;
+    }
+    #map {
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:100%;
+    }
+    #legend {
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 18px;
+      height: auto;
+      margin-bottom: 40px;
+      width: auto;
+    }
+    .legend-key {
+      display: inline-block;
+      border-radius: 20%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
   </style>
 </head>
 <body>
 
 <div id='map'></div>
+<div class="map-overlay" id="legend"></div>
+<div class='map-overlay' id="features"><h3>Redlined Areas in Norfolk</h3><div id='pd'><p>Click on a redlined area to see some interesting info from 2019 and how it compares to 1940!</p></div></div>
 
   <script>
     // Change this to your Access token ----------------------
@@ -41,6 +88,43 @@
       },
       trackUserLocation: true
     }));
+
+    // Use the load callback function to only run this code after the map fully loads
+    map.on('load', () => {
+      // Create arrays for the legend
+      const layers = [
+        'A - Best',
+        'B - Still Desirable',
+        'C - Definitely Declining',
+        'D - Hazardous'
+      ];
+      const colors = [
+        '#509159',
+        '#3d93ae',
+        '#d4ce54',
+        '#d17b83'
+      ];
+
+      // create the legend
+      const legend = document.getElementById('legend');
+
+      layers.forEach((layer, i) => {
+        const color = colors[i];
+        const item = document.createElement('div');
+        const key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        const value = document.createElement('span');
+        value.innerHTML = `${layer}`;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+      });
+
+      // change style of the cursor on the map
+      map.getCanvas().style.cursor = 'pointer';
+    });
   </script>
 
 </body>
