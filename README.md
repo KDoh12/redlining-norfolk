@@ -2,7 +2,7 @@
 
 ## Project
 
-Here is the link to the project: [Redlining in Norfolk](https://kdoh12.github.io/redlining-norfolk/map.html)
+Here is the link to the project: [Redlining in Norfolk](https://kdoh12.github.io/redlining-norfolk)
 
 Feel free to read below to understand where the data came from, how I created the map, and what I took away from this project.
 
