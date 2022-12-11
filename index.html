@@ -19,7 +19,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: #c7c9c8;
+            background: #ececec;
             font-family: 'Lato', sans-serif;
             font-weight: 300;
             color: #3d3d3d;
@@ -60,7 +60,7 @@
         }
 
         a {
-            color: #15397f;
+            color: #3366CC;
             text-decoration: none;
         }
 
@@ -131,6 +131,11 @@
             margin: -8px 10px -8px 0;
         }
 
+        #map-meta {
+            font-style: italic;
+            font-size: medium;
+        }
+
         /* When browser is 800px wide or less */
 
         @media screen and (max-width: 800px) {
@@ -151,28 +156,22 @@
         <h1>1940 Redlining in Norfolk: Now vs Then</h1>
         <h2>University of Kentucky New Maps Plus</h2>
         <div class="row">
-            <div class="first-column">
+            <div>
                 <p>
-                    This is the index page of my project. I do not have much here at the moment but will soon. Click on the link below the map or click <a href="map.html">here</a> for a full-screen version of my map. The main part of my map will be that you can click on each redline polygon and see statistics from 1940, and relatively the same statistics from 2019. I want to also make something show when hovering over the polygon, perhaps the neighborhood name from 1940.
+                    Redlining is a discriminatory practice of refusing services to a specif area or neighborhood based on certain characteristics. Click on the link below the map or click <a href="map.html">here</a> for a full-screen version of my map.<br><br>The colored areas on the map above are the actual boundaries created by the Home Owner Loan Corporation (HOLC) during the 1930s and 40s. They are colored based on the "grade" they were assigned by the HOLC which is A, B, C, and D grades with "A" being deemed the "best" areas for investment, and "D" being areas that investors should avoid unless absolutely necessary. If you click on the areas you will see some economic, home-ownership, and demographic data from both the 1940s and from 2019. The idea is to get a sense of what those areas were like back in 1940 as well has how they are today and examine any similarities or differences.
                 </p>
                 <p>
-
+                    Visit my README page <a href="https://github.com/KDoh12/redlining-norfolk">here</a> for more info on the project.
                 </p>
-                <p>
-                    Until this page is updated, plese visit the README page <a href="https://github.com/KDoh12/redlining-norfolk">here</a> for more info on the project.
+                <hr>
+                <h4>
+                    Map Properties
+                </h4>
+                <p id="map-meta">
+                    Map was created using <a href="https://www.mapbox.com/">Mapbox</a>. Layers were prepared in <a href="https://qgis.org/en/site/">QGIS</a>.<br>Map and Layers are projected using the WGS84 Web Mercator coordinate system.<br>Map created by Kevin Dohner | Creation Date: December 2022<br>See more of my projects on Github: <a href="https://github.com/KDoh12">KDoh12</a>
                 </p>
-
-
-
-
-
             </div>
         </div>
-
-
-        <hr>
-        <!-- <h4><a href="https://uky-gis.github.io">UKy GIS and Mapping</a></h4> -->
-        <p>See more of my projects on Github: <a href="https://github.com/KDoh12">KDoh12</a></p>
     </section>
 </body>
 </html>
