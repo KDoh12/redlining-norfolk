@@ -11,13 +11,14 @@
       margin:0;
       padding:0;
     }
-    h3 {
+    #one {
+      font-size: smaller;
+      font-style: italic;
+    }
+    #two {
       margin: 10px;
     }
-    p {
-      margin: 10px;
-    }
-    .map-overlay {
+    .map-overlay-legend {
       position: absolute;
       bottom: 0;
       right: 0;
@@ -26,6 +27,19 @@
       font-family: Arial, sans-serif;
       overflow: auto;
       border-radius: 3px;
+    }
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: #fff;
+      margin-left: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
+    .mapboxgl-popup{
+      max-width: none;
     }
     #features {
       top: 0;
@@ -59,8 +73,8 @@
 <body>
 
 <div id='map'></div>
-<div class="map-overlay" id="legend"></div>
-<div class='map-overlay' id="features"><h3>Redlined Areas in Norfolk</h3><div id='pd'><p>Click on a redlined area to see some interesting info from 2019 and how it compares to 1940!</p></div></div>
+<div class="map-overlay-legend" id="legend"></div>
+<div class='map-overlay' id="features"><h3 id="two">Redlined Areas in Norfolk</h3><div id='pd'><p id="two">Click on a redlined area to see some interesting info from 2019 and how it compares to 1940!</p></div></div>
 
   <script>
     // Change this to your Access token ----------------------
@@ -122,9 +136,27 @@
         legend.appendChild(item);
       });
 
-      // change style of the cursor on the map
-      map.getCanvas().style.cursor = 'pointer';
+      // Create popup, define the contents, and add to the map
+      map.on('click', 'norfolk-redlined-census', (e) => {
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(
+            '<h3>1940</h3> <p>Avg Home Income*: $' + e.features[0].properties.HolcAvgIncome.toLocaleString("en", {useGrouping:true}) + '<br>Avg Home Income Adjusted**: $' + e.features[0].properties.HolcAvgIncomeAdjust.toLocaleString("en", {useGrouping:true}) + '<br>Black Population: ' + e.features[0].properties.HolcBlack + '<br>Home-owner Population: ' + e.features[0].properties.HolcOwnerOccupied + '</p><p id="one">Note*: $0 = no data<br>Note**: Adjusted from 1940 to 2019</p><hr><h3>2019</h3> <p>Avg Home Income: $' + e.features[0].properties.MeanHomeIncome.toLocaleString("en", {useGrouping:true}) + '<br>Minority Population: ' + e.features[0].properties.MinorityPercent + '%<br>Home-owner Population: ' + e.features[0].properties.OwnedPercent + '%<br>Renting Population: ' + e.features[0].properties.RentedPercent + '%</p>'
+          )
+          .addTo(map);
+      });
     });
+
+    // Change cursor to pointer upon hovering over feature
+    map.on('mouseenter', 'norfolk-redlined-census', () => {
+      map.getCanvas().style.cursor = 'pointer'
+    });
+
+    // Change cursor to default upon hovering over feature
+    map.on('mouseleave', 'norfolk-redlined-census', () => {
+      map.getCanvas().style.cursor = ''
+    });
+    
   </script>
 
 </body>
